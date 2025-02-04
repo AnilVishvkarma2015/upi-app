@@ -1,0 +1,61 @@
+.registration-card {
+    min-width: 400px;
+    margin: 15px auto auto auto;
+    border-radius: 5px;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+ }
+
+ .dialog-title-hr {
+    width: 91%;
+}
+
+.card-full-width {
+    width: 100%;
+
+    tr {
+        height: 35px;
+    }
+}
+
+.forget-pwd-btn {
+    margin-left: 15px;
+}
+
+.card-title {
+    font-family: 'Passion One', cursive;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 10px;
+}
+  
+mat-card-actions {
+    margin: 0 auto;
+    padding: 0;
+
+    button {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: Roboto,"Helvetica Neue",sans-serif;
+        text-transform: uppercase;
+    }
+}
+
+mat-card-content {
+    margin-top: 15px;
+
+    mat-label {
+        font-size: 12px;
+     }
+}
+
+.formsubmitted-card {
+    margin-top: 250px;
+    background: none;
+    border: none;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: forestgreen;
+    font-weight: 500;
+}
+ 

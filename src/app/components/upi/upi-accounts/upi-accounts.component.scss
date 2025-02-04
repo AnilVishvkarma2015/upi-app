@@ -1,0 +1,107 @@
+.upi-card {
+    width: 600px;
+    height: 170px;
+ }
+
+.upi-account-tag {
+    font-size: 12px;
+    font-weight: 900;
+    font-family: Acme;
+    text-transform: uppercase;
+}
+
+.no-account-row {
+    height: 125px;
+}
+
+.add-new-account {
+    margin: 12px 13px;
+    border-style: dashed;
+    border-radius: 10px;
+    background: ghostwhite;
+    height: 95px;
+}
+
+.added-account {
+    margin: 12px 12px;
+    border-style: outset;
+    border-radius: 10px;
+    background: ghostwhite;
+    height: 95px;
+}
+
+.add-new-account-icon {
+    margin: 15px 130px 0 125px;
+    display: flex;
+    font-size: 40px;
+    opacity: 60%;
+    cursor: pointer;
+}
+
+.add-new-account-label {
+    font-size: 11px;
+    font-family: Roboto;
+    text-transform: uppercase;
+    margin: 85px;
+    color: royalblue;
+}
+
+.bank-avtar {
+    width: 60px;
+    height: 60px;
+    padding: 4px;
+    margin: 10px 10px 0 10px;
+    border: 2px white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 1);
+}
+
+.bank-balance {
+    width: 60px;
+    height: 60px;
+    /* padding: 0px; */
+    margin: 2px 35px 0 35px;
+    cursor: pointer;
+}
+
+.bank-balance-name {
+   margin: 0px 0px 0 12px;
+    font-size: 10px;
+    font-family: system-ui;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bank-transfer-name {
+    margin: 0px 0px 0 25px;
+     font-size: 10px;
+     font-family: system-ui;
+     text-transform: uppercase;
+     font-weight: bold;
+     cursor: pointer;
+ }
+
+
+.upi-acc-bankname {
+    font-size: 12px;
+}
+
+.upi-acc-ac-name{
+    margin-top: 5px;
+    font-size: 11px;
+}
+
+.upi-avtar {
+    height: 24px;
+    padding: 6px;
+    margin: 14px 14px 0 14px;
+}
+
+.accounter-details {
+    font-size: 10px;
+    margin: 13px;
+    font-family: system-ui;
+    text-transform: uppercase;
+}
+

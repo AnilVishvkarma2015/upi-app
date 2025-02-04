@@ -1,0 +1,43 @@
+<mat-card class="device-card">
+    <div fxLayout="row"  style="margin: 10px 10px 0 10px;">
+        <div fxFlex="100%">
+            <span class="device-profile-tag">mobile network details</span>
+        </div>
+    </div>
+    <hr>
+
+    <div fxLayout="row">
+        <div fxFlex="50%" class="sim-one-card">
+            <div fxFlex="30%">
+                <div>
+                    <img src="../../../../assets/sim-1.png" alt="image" class="sim-icon">
+                </div>
+            </div>
+            <div fxFlex='70%' class="device-details">
+                <div class="network-provider-name">{{currentDevice.primaryNetworkProvider}}</div>
+                <div class="network-mobile">+91 {{currentDevice.primaryMobile}}</div>
+                <div class="network-imei">IMEI: {{currentDevice.primaryImei}}</div>
+            </div>
+        </div>
+
+        
+        <div *ngIf="isSecondDeviceAvailable" fxFlex="50%" class="sim-two-card">
+            <div fxFlex="30%">
+                <div>
+                    <img src="../../../../assets/sim-2.png" alt="image" class="sim-icon">
+                </div>
+            </div>
+            <div fxFlex='70%' class="device-details">
+                <div class="network-provider-name">{{currentDevice.secondaryNetworkProvider}}</div>
+                <div class="network-mobile">+91 {{currentDevice.secondaryMobile}}</div>
+                <div class="network-imei">IMEI: {{currentDevice.secondaryImei}}</div>
+            </div>
+        </div>
+
+        <div *ngIf="!isSecondDeviceAvailable" fxFlex="50%" class="sim-two-card-new">
+            <!--<i class="fa fa-plus sim-new-icon" aria-hidden="true" (click)="openDialog()"></i> -->
+            <span class="sim-new-icon" (click)="openDialog()">+</span>
+            <span class="sim-new-insert-text">insert new sim</span>
+        </div>
+    </div>
+</mat-card>

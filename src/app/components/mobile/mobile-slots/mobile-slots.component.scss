@@ -1,0 +1,84 @@
+.device-card {
+    width: 600px;
+    height: 175px;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+ }
+
+ .device-profile-tag {
+    font-size: 12px;
+    font-weight: 900;
+    font-family: Acme;
+    text-transform: uppercase;
+}
+
+.device-details {
+    margin: 18px 5px;
+}
+
+.network-provider-name {
+    font-size: 18px;
+    font-family: 'Patua One';
+}
+
+.network-mobile {
+    margin-top: 3px;
+    font-size: 12px;
+    font-family: 'Patua One', cursive;
+}
+
+.network-imei {
+    margin-top: 3px;
+    font-size: 8px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.sim-one-card {
+    margin: 12px 13px;
+    background: linear-gradient(90deg, #7bc3d6 0%, #a5eeac 100%);
+    border-style: dashed;
+    border-radius: 10px;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+}
+
+.sim-two-card {
+    margin: 12px 13px;
+    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+    border-style: dashed;
+    border-radius: 10px;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+}
+
+.sim-icon {
+    height: 90px;
+    width: 90px;
+}
+
+.sim-two-card-new {
+    margin: 12px 13px;
+    border-style: dashed;
+    border-radius: 10px;
+    background: ghostwhite;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+}
+
+.sim-new-icon {
+    margin: 15px 130px 0 125px;
+    display: flex;
+    font-size: 40px;
+    opacity: 60%;
+    cursor: pointer;
+}
+
+.sim-new-insert-text {
+    font-size: 11px;
+    font-family: Roboto;
+    text-transform: uppercase;
+    margin: 95px;
+    color: royalblue;
+}
+
+.account-added-loader {
+    font-size: 100px;
+    margin: 0 42%;
+}
+

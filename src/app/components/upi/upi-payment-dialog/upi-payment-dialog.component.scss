@@ -1,0 +1,174 @@
+.add-account-card {
+    width: 400px;
+    //height: 500px;
+ }
+
+.dialog-title-hr {
+    width: 90%;
+}
+
+.card-full-width {
+    width: 100%;
+}
+
+.card-title {
+    font-family: 'Passion One', cursive;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+    text-transform: capitalize;
+}
+
+mat-card-actions {
+    padding: 0;
+
+    button {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: Roboto,"Helvetica Neue",sans-serif;
+        text-transform: uppercase;
+        margin-top: 15px;
+    }
+}
+
+mat-card-content {
+    margin-top: 15px;
+
+    mat-label {
+       font-size: 13px;
+    }
+}
+
+.mat-raised-button{
+    border-radius: 0px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    text-transform: uppercase;
+}
+
+.select-bank-option {
+    font-size: 13px;
+    min-height: 40px;
+}
+
+.sim-option-label {
+    margin-top: -15px;
+    font-family: system-ui;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.sim-option {
+    font-size: 12px;
+    margin: -7px;
+}
+  
+.sent-sms-icon {
+    font-size: 15px;
+    color: green;
+}
+
+.sent-sms-text {
+    font-size: 13px;
+    margin: 5px;
+    font-family: Roboto;
+}
+
+.sent-sms-loader {
+    font-size: 13px;
+    margin: 12px;
+    font-family: Roboto;
+}
+
+.bank-avtar {
+    width: 11px;
+    margin-right: 8px;
+}
+
+.bank-account-found-label {
+    margin-top: -15px;
+    margin-bottom: 15px;
+    font-family: system-ui;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.proceed-to-add-btn {
+    margin-left: 133px;
+}
+
+.proceed-to-next-btn {
+    margin-left: 180px;
+}
+
+.proceed-to-pay-btn {
+    margin-left: 219px;
+}
+
+.account-added-loader {
+    font-size: 100px;
+    margin: 0 42%;
+}
+
+.account-added-success-icon {
+    font-size: 100px;
+    color: green;
+    margin: 0 38%;
+}
+
+.account-added-success-label {
+    font-size: 13px;
+    font-family: Roboto;
+    margin-left: 24%;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+.paid-to-text {
+    font-size: 13px;
+    font-family: Roboto;
+}
+
+.payee-account-name {
+    font-size: 10px;
+    font-family: Roboto;
+    margin-left: 1%;
+    margin-top: -15px;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.account-added-success-details {
+    margin: 6px 5% 0 5%;
+}
+
+.account-added-text {
+    font-size: 23px;
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.bank-balance {
+    width: 17px;
+    height: 17px;
+    margin-top: 5px;
+}
+
+.account-added-pin-label {
+    margin: 5% 0 5% 5%;
+    
+    button {
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+}
+
+.done-button {
+    padding: 0px 146px;
+}
+
+
+ 

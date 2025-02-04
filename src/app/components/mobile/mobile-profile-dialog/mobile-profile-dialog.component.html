@@ -1,0 +1,45 @@
+<mat-card class="show-profile-card">
+    <mat-card-title class="card-title">device details</mat-card-title>
+    <hr class="dialog-title-hr">
+    <mat-card-content>
+        <form [formGroup]="form">
+            <table class="card-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Customer Name</mat-label>
+                            <input matInput placeholder="Customer Name" formControlName="customerName" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Date Of Birth</mat-label>
+                            <input matInput placeholder="Date Of Birth" formControlName="dob" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Gender</mat-label>
+                            <input matInput placeholder="Gender" formControlName="gender" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Primary Mobile</mat-label>
+                            <input matInput placeholder="Primary Mobile" formControlName="primaryMobile" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <mat-card-actions>
+                <button mat-raised-button color="basic" (click)="close()">close</button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+</mat-card>

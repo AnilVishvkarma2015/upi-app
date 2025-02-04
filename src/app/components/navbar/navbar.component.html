@@ -1,0 +1,54 @@
+<div *ngIf="(isLoggedIn | async); then authenticatedUser else guest"></div>
+<ng-template #authenticatedUser>
+    <div *ngIf="(isBank | async); then admin else user"></div>
+    <ng-template #admin>
+        <mat-toolbar color="primary">
+            <span class="appName">ORACLE UPI</span>
+            <span class="spacer"></span>
+            <a mat-button routerLink="/bank-dashboard">
+                <b>home</b>
+            </a>
+            <a mat-button routerLink="/bank-accounts">
+                <b>accounts</b>
+            </a>
+            <a mat-button routerLink="/bank-transactions">
+                <b>transactions</b>
+            </a>
+            <a mat-button routerLink="/bank-statement">
+                <b>statement</b>
+            </a>
+            <button type="submit" mat-raised-button color="primary" class="logout-btn" (click)="onLogoutClick()">
+                <b>logout</b>
+            </button>
+        </mat-toolbar>
+    </ng-template>
+
+    <ng-template #user>
+        <mat-toolbar color="primary">
+            <span class="appName">ORACLE UPI</span>
+            <span class="spacer"></span>
+            <a mat-button routerLink="/mobile-dashboard">
+                <b>home</b>
+            </a>
+            <button type="submit" mat-raised-button color="primary" class="logout-btn" (click)="onLogoutClick()">
+                <b>logout</b>
+            </button>
+        </mat-toolbar>
+    </ng-template>
+</ng-template>
+
+<div>
+    <ng-template #guest>
+    <mat-toolbar color="primary" class="fixed-header">
+        <span class="appName">Oracle UPI</span>
+        <span class="spacer"></span>
+        <a mat-button routerLink="/mobile-registration">
+            <b>register device</b>
+        </a>
+        <a mat-button routerLink="/login">
+            <b>login</b>
+        </a>
+    </mat-toolbar>
+    </ng-template>
+</div>
+<router-outlet></router-outlet>

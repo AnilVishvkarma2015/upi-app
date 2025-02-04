@@ -1,0 +1,151 @@
+<mat-card class="add-account-card">
+    <mat-card-title class="card-title">payment transfer</mat-card-title>
+    <hr class="dialog-title-hr">
+    <mat-card-content>
+        <ngx-spinner bdColor = "#F0F8FF" size = "medium" color = "#1e81b0" type = "ball-clip-rotate" [fullScreen] = "false" style="opacity: 0.6;"></ngx-spinner>
+        <form [formGroup]="form">
+            <table class="card-full-width" cellspacing="0">
+                <tr *ngIf="shouldShowPayeeUPIScreen">
+                    <div class="bank-account-found-label">Please enter Payee UPI ID for payment
+                    </div>
+                </tr>
+
+                <tr *ngIf="shouldShowPayeeUPIScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Payee UPI ID</mat-label>
+                            <input matInput placeholder="Payee UPI ID" formControlName="payeeUpiId"
+                                (keyup)="isValidPayeeAvailable($event)">
+                            <mat-error *ngIf="isFieldInvalid('payeeUpiId')">
+                                Please enter payee upi id
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr *ngIf="enableUPITransferButton">
+                    <div class="payee-account-name">Payee Name: {{payeeUpiAccount.accName}} |
+                        {{payeeUpiAccount.bankCode}} Bank
+                    </div>
+                </tr>
+
+                <mat-card-actions *ngIf="shouldShowPayeeUPIScreen">
+                    <button mat-raised-button color="basic" (click)="close()">cancel
+                    </button>
+                    <button [disabled]="!enableUPITransferButton" mat-raised-button color="primary"
+                        class="proceed-to-next-btn" (click)="onNextTransferScreen()">next step</button>
+                </mat-card-actions>
+
+                <tr *ngIf="shouldShowUPITransferScreen">
+                    <div class="bank-account-found-label">Please enter amount & UPI PIN for payment
+                    </div>
+                </tr>
+
+                <tr *ngIf="shouldShowUPITransferScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Amount</mat-label>
+                            <input matInput placeholder="Amount" formControlName="amount">
+                            <mat-error *ngIf="isFieldInvalid('amount')">
+                                Please enter amount to pay
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr *ngIf="shouldShowUPITransferScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>UPI PIN</mat-label>
+                            <input matInput placeholder="UPI PIN" formControlName="upiPin" type="password">
+                            <mat-error *ngIf="isFieldInvalid('upiPin')">
+                                Please enter upi pin
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <div *ngIf="isLoading"
+                    style="display: flex; justify-content: center; align-items: center; background: white;">
+                    <mat-progress-spinner color="primary" mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+
+                <mat-card-actions *ngIf="shouldShowUPITransferScreen">
+                    <button mat-raised-button color="basic" (click)="close()">cancel
+                    </button>
+                    <button [disabled]="!form.valid" *ngIf="shouldShowUPITransferScreen" mat-raised-button
+                        color="primary" class="proceed-to-pay-btn" (click)="onNextPaymentScreen()">pay</button>
+                </mat-card-actions>
+
+                <tr>
+                    <div *ngIf="shouldShowUPIPaymentScreen">
+                        <i class="fa fa-check-circle-o account-added-success-icon" aria-hidden="true"></i>
+                        <span class="account-added-success-label">Payment transferred successfully</span>
+                        <div fxLayout="column" class="account-added-success-details">
+                            <div fxLayout="row" style="margin-bottom: 10px;">
+                                <td fxFlex="40%"></td>
+                                <td fxFlex="5%" style="margin-top: 1px;">
+                                    <img src="../../../../assets/rs-icon.png" alt="image" class="bank-balance">
+                                </td>
+                                <td fxFlex="2%">
+                                   
+                                </td>
+                                <td fxFlex="5%">
+                                    <span class="account-added-text">
+                                        {{form.value.amount}}</span>
+                                </td>
+                            </div>
+
+                            <div fxLayout="row" class="paid-to-text">
+                                <td fxFlex="21%"></td>
+                                <td fxFlex="25%">
+                                    Beneficiary
+                                </td>
+                                <td fxFlex="4%">
+                                    :
+                                </td>
+                                <td fxFlex="60%">
+                                    {{payeeUpiAccount.accName}}
+                                </td>
+                            </div>
+
+                            <div fxLayout="row" class="paid-to-text" style="margin-top: 7px;">
+                                <td fxFlex="21%"></td>
+                                <td fxFlex="25%">
+                                    Reference No
+                                </td>
+                                <td fxFlex="4%">
+                                    :
+                                </td>
+                                <td fxFlex="60%">
+                                    {{rrn}}
+                                </td>
+                            </div>
+
+                            <div fxLayout="row" class="paid-to-text" style="margin-top: 7px;">
+                                <td fxFlex="21%"></td>
+                                <td fxFlex="25%">
+                                    Date Time
+                                </td>
+                                <td fxFlex="4%">
+                                    :
+                                </td>
+                                <td fxFlex="60%">
+                                    {{dateTime}}
+                                </td>
+                            </div>
+                        </div>
+                        <div fxLayout="row" class="account-added-pin-label">
+                            <td fxFlex="30%">
+                                <button mat-raised-button color="primary" (click)="onSubmit()"
+                                    class="done-button">done</button>
+                            </td>
+                        </div>
+                    </div>
+                </tr>
+
+            </table>
+
+        </form>
+    </mat-card-content>
+</mat-card>

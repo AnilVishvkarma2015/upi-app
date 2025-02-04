@@ -1,0 +1,97 @@
+<div *ngIf="( isNewForm | async); then newForm else formSubmitted"></div>
+<ng-template #newForm>
+    <mat-card class="registration-card">
+        <mat-card-title class="card-title">MOBILE REGISTRATION</mat-card-title>
+        <hr class="dialog-title-hr">
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <table class="card-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="card-full-width" appearance="outline">
+                                <mat-label>Customer Name</mat-label>
+                                <input matInput placeholder="Customer Name" formControlName="customerName">
+                                <mat-error *ngIf="isFieldInvalid('customerName')">
+                                    Please enter customer name
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="card-full-width" appearance="outline">
+                                <mat-label>Date Of Birth</mat-label>
+                                <input matInput [matDatepicker]="picker" placeholder="Date of Birth"
+                                    formControlName="dob">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-error> Please select date of birth </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="card-full-width" appearance="outline">
+                                <mat-label>Gender</mat-label>
+                                <mat-select placeholder="Gender" formControlName="gender">
+                                    <mat-option *ngFor="let gender of genders" [value]="gender">
+                                        {{ gender }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error> Please select gender </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="card-full-width" appearance="outline">
+                                <mat-label>Mobile</mat-label>
+                                <input matInput placeholder="Mobile" formControlName="primaryMobile">
+                                <mat-error *ngIf="isFieldInvalid('primaryMobile')">
+                                    Please enter valid mobile number
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="card-full-width" appearance="outline">
+                                <mat-label>Network Provider</mat-label>
+                                <mat-select placeholder="Network Provider" formControlName="primaryNetworkProvider">
+                                    <mat-option *ngFor="let primaryNetworkProvider of networkProviders"
+                                        [value]="primaryNetworkProvider">
+                                        {{ primaryNetworkProvider }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error> Please select network provider </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <mat-card-actions>
+                    <button [disabled]="!form.valid" mat-raised-button color="accent" type="submit">register</button>
+                </mat-card-actions>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
+
+<ng-template #formSubmitted>
+    <div *ngIf="isAccountRegistered">
+        <mat-card class="registration-card">
+            <div class="registration-card formsubmitted-success-card">
+                <i class="fa fa-check-circle-o account-added-success-icon" aria-hidden="true"></i>
+                <div>Mobile has been registered successfully. Please login to your account.</div>
+            </div>
+        </mat-card>
+    </div>
+
+    <div *ngIf="!isAccountRegistered">
+        <mat-card class="registration-card">
+            <div class="registration-card formsubmitted-failed-card">
+                <i class="fa fa-exclamation-triangle account-added-failed-icon" aria-hidden="true"></i>
+                <div>Mobile registration is failed due technical error. Please try again after some time.</div>
+            </div>
+        </mat-card>
+    </div>
+</ng-template>

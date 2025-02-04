@@ -1,0 +1,37 @@
+<mat-card class="profile-card">
+
+    <div *ngIf="!isLoading"> 
+
+        <mat-card class="card-style">
+            <div style="display: flex; justify-content: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </mat-card>
+    </div>
+
+    <div fxLayout="row"  style="margin: 10px 10px 0 10px;">
+        <div fxFlex="100%">
+            <span class="user-profile-tag">device profile</span>
+        </div>
+    </div>
+    <hr>
+    <div fxLayout="row" style="margin: 12px;">
+        <div fxFlex="20%">
+            <div *ngIf="currentDevice.gender == 'Female'">
+                <img src="../../../../assets/user-female.png" alt="image" class="user-avtar">
+            </div>
+
+            <div *ngIf="currentDevice.gender == 'Male'">
+                <img src="../../../../assets/user-male.png" alt="image" class="user-avtar">
+            </div>
+        </div>
+        <div fxFlex='75%' class="user-details">
+            <div class="user-details-name">{{currentDevice.customerName}}</div>
+            <div class="user-details-mobile">+91 {{currentDevice.primaryMobile}}</div>
+        </div>
+        <div fxFlex='5%' class="user-more">
+            <i class="fa fa-chevron-right" matTooltip="More information" (click)="openDialog()"></i>
+        </div>
+    </div>
+</mat-card>

@@ -1,0 +1,54 @@
+<mat-card class="upi-card">
+    <div fxLayout="row" style="margin: 10px 10px 0 10px;">
+        <div fxFlex="100%">
+            <span class="upi-account-tag">upi account</span>
+        </div>
+    </div>
+    <hr>
+
+    <div *ngIf="!isUPIAccountAvailable" fxLayout="row" class="no-account-row">
+        <div *ngIf="true" fxFlex="46%" class="add-new-account">
+            <span class="add-new-account-icon" (click)="openAddAccountDialog()">+</span>
+            <span class="add-new-account-label">add new account</span>
+        </div>
+    </div>
+
+    <div *ngIf="isUPIAccountAvailable" fxLayout="row" class="no-account-row">
+        <div *ngIf="upiAccounts[0] != null" fxFlex="50%" class="added-account">
+            <div fxLayout="row">
+                <div fxFlex="25%">
+                    <img src="../../../../assets/{{upiAccounts[0].bankCode}}.png" alt="image" class="bank-avtar">
+                </div>
+                <div fxFlex="5%"></div>
+                <div fxFlex="70%" class="accounter-details">
+                    <div class="upi-acc-bankname">{{upiAccounts[0].bankName}}</div>
+                    <div class="upi-acc-ac-name">XXXX XXXX {{trimmedUPIAccount}}</div>
+                    <div class="upi-acc-ac-name">{{upiAccounts[0].accType}} | Primary</div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="upiAccounts[0] != null" fxFlex="21.5%" class="added-account">
+            <div fxLayout="row">
+                <div (click)="openUPIPaymentDialog()">
+                    <img src="../../../../assets/bank-transfer.png" alt="image" class="bank-balance">
+                    <span class="bank-transfer-name">
+                        upi transfer
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="upiAccounts[0] != null" fxFlex="21.5%" class="added-account">
+            <div fxLayout="row">
+                <div (click)="openBankBalanceDialog()">
+                    <img src="../../../../assets/bank-balance.png" alt="image" class="bank-balance">
+                    <span class="bank-balance-name">
+                        Account Balance
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card>

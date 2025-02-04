@@ -1,0 +1,79 @@
+.profile-card {
+    width: 600px;
+    height: 175px;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+}
+
+.card-full-width {
+    width: 100%;
+}
+
+.card-title {
+    font-family: 'Passion One', cursive;
+    font-size: 30px;
+    text-align: center;
+    margin: 15px;
+}
+
+.user-profile-tag {
+    font-size: 12px;
+    font-weight: 900;
+    font-family: Acme;
+    text-transform: uppercase;
+}
+
+.user-avtar {
+    height: 95px;
+    width: 95px;
+    border-radius: 10%;
+}
+
+.user-details {
+    margin: 25px 15px;
+}
+
+.user-details-name {
+    font-size: 18px;
+    font-family: 'Patua One';
+    text-transform: uppercase;
+}
+
+.user-details-mobile {
+    margin-top: 4px;
+    font-size: 13px;
+    font-family: 'Patua One', cursive;
+}
+
+.user-more {
+    margin: 35px 0px;
+    opacity: 40%;
+}
+
+mat-card-actions {
+    margin: 0 auto;
+    padding: 0;
+
+    button {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: Roboto,"Helvetica Neue",sans-serif;
+        text-transform: uppercase;
+    }
+}
+
+mat-card-content {
+    margin-top: 15px;
+}
+
+.mat-raised-button{
+    border-radius: 0px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    text-transform: uppercase;
+}
+
+.forget-pwd-btn {
+    margin-left: 15px;
+}
+ 

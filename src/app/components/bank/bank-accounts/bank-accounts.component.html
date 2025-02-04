@@ -1,0 +1,93 @@
+<div class="table-layout">
+    <div>
+        <div fxFlex="60%">
+            <button mat-raised-button color="primary" type="submit" (click)="addBankAccount()">ADD</button>
+            <button mat-raised-button color="primary" type="submit" (click)="downloadAccountsPDF()"
+                style="margin-left: 15px;" *ngIf="isAccountFound">DOWNLOAD</button>
+        </div>
+
+        <div fxFlex="40%" style="text-align: end">
+            <mat-form-field class="card-full-width" appearance="outline" style="width: 55%;">
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngIf="!isAccountFound" class="no-account"> No account found under this bank.</div>
+
+    <div class="res-table-container mat-elevation-z8" *ngIf="isAccountFound">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+            <!-- Product Name Column -->
+            <ng-container matColumnDef="accName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Account Name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Account Name:</span> {{row.accName}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="accNum">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Account No
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Account No:</span> {{row.accNum}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="accType">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Account Type
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Account Type:</span> {{row.accType}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="accIfsc">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Account IFSC
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Account IFSC:</span> {{row.accIfsc}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="mobileNo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Mobile No </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Mobile No:</span> {{row.mobileNo}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="bankBranch">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Bank Branch
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Bank Branch:</span> {{row.bankBranch}}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef class="header-cell"> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <span class="mobile-label">Actions:</span>
+                    <a class="action-btn" (click)="updateAccount(row)">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+                    <a class="action-btn" (click)="downloadAccountPDF(row)">
+                        <mat-icon>print</mat-icon>
+                    </a>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</div>

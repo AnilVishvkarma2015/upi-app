@@ -1,0 +1,103 @@
+<mat-card class="login-card">
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onAccountSubmit()">
+            <table cellspacing="0">
+                <tr>
+                    <td style="width: 1%;"></td>
+                    <td style="width: 10%;">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Customer Account NO</mat-label>
+                            <input matInput placeholder="Customer Account NO" formControlName="accNum">
+                            <mat-error *ngIf="isFieldInvalid('accNum')">
+                                Please enter customer account no
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td style="width: 1%">
+                    <td style="width: 4%">
+                        <mat-card-actions style="margin-top: -20px;">
+                            <button class="acc-submit-btn" mat-raised-button color="primary" [disabled]="!form.valid"
+                                type="submit">search</button>
+                        </mat-card-actions>
+                    </td>
+                    <td style="width: 1%"></td>
+                    <td style="width: 4%" *ngIf="isAccountFound">
+                        <mat-card-actions style="margin-top: -20px;">
+                            <button class="acc-submit-btn" mat-raised-button color="primary" type="submit"
+                                (click)="downloadStatementPDF()">DOWNLOAD</button>
+                        </mat-card-actions>
+                    </td>
+                    <td style="width: 79%">
+                </tr>
+            </table>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="noAccountFound" class="no-account"> No statement records found for provided account</div>
+
+<div class="table-layout" *ngIf="isAccountFound">
+    <div class="res-table-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+            <!-- Product Name Column -->
+            <ng-container matColumnDef="datetimeCreated">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Date Time
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Date Time:</span> {{row.datetimeCreated}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="txnNarrative">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Particulars
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Particulars:</span> {{row.txnNarrative}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="txnRefNo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Reference No
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Reference No:</span> {{row.txnRefNo}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="debit">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Debit
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Debit:</span> {{row.debit}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="credit">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Credit
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Credit:</span> {{row.credit}}
+                </mat-cell>
+            </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="accBalance">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Balance
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <span class="mobile-label">Balance:</span> {{row.accBalance}}
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+
+ .dashboard-card {
+    max-width: 500px;
+    height: 380px;
+    margin: 150px auto auto auto;
+    border-radius: 5px;
+    //box-shadow: 10px 10px 44px 0px rgba(0, 0, 0, 0.75);
+ }
+
+ .dialog-title-hr {
+    width: 80%;
+}
+
+.card-full-width {
+    width: 100%;
+}
+
+.bank-avtar {
+    width: 80px;
+    height: 80px;
+    padding: 5px 200px;
+    margin: 10px 10px 0 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    /* box-shadow: 1px 1px 1px 1px rgba(1, 1, 1, 0.5); */
+}
+
+.bank-name {
+    font-family: 'Passion One', sans-serif;
+    font-size: 16px;
+    text-align: center;
+  }
+
+.card-title {
+    font-family: 'Passion One', cursive;
+    font-size: 30px;
+    text-align: center;
+    margin: 15px;
+}

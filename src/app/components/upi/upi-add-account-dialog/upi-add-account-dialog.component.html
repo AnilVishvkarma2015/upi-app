@@ -1,0 +1,314 @@
+<mat-card class="add-account-card">
+    <mat-card-title class="card-title">add new account</mat-card-title>
+    <hr class="dialog-title-hr">
+    <mat-card-content>
+        <form [formGroup]="form">
+            <table class="card-full-width" cellspacing="0">
+                <tr *ngIf="shouldShowBankOptions">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Select Bank</mat-label>
+                            <mat-select placeholder="Select Bank" formControlName="bank"
+                                (selectionChange)="onBankSelection()">
+                                <mat-option *ngFor="let bank of supportedBanks" [value]="bank"
+                                    class="select-bank-option">
+                                    <img src="../../../../assets/{{bank.bankCode}}.png" alt="image" class="bank-avtar">
+                                    {{ bank.bankName }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error> Please select bank </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr *ngIf="shouldShowSimSlotsOptions">
+                    <td>
+                        <div class="sim-option-label">Select SIM slot registered with {{upiRegisterForm.bankName}}</div>
+                        <mat-radio-group formControlName="selectedSlot" (change)="onSimSelection()">
+                            <mat-radio-button [value]="currentDevice.primaryMobile" class="sim-option">SIM 1 |
+                                {{currentDevice.primaryMobile}}</mat-radio-button><br>
+                            <mat-radio-button [value]="currentDevice.secondaryMobile" class="sim-option">SIM 2 |
+                                {{currentDevice.secondaryMobile}}</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr *ngIf="shouldStartSmsSending">
+                    <div fxLayout="row">
+                        <td *ngIf="!isSmsSent" fxFlex="5%">
+                            <mat-progress-spinner color="green" mode="indeterminate" [diameter]="15">
+                            </mat-progress-spinner>
+                        </td>
+                        <td *ngIf="isSmsSent" fxFlex="5%">
+                            <i class="fa fa-check-circle sent-sms-icon" aria-hidden="true"></i>
+                        </td>
+                        <td fxFlex="95%">
+                            <span class="sent-sms-text"> Sending SMS through {{upiRegisterForm.mobileNo}} for
+                                verification...</span>
+                        </td>
+                    </div>
+                </tr>
+                <tr *ngIf="shouldStartMobileVerification">
+                    <div fxLayout="row">
+                        <td *ngIf="!isMobileVerified" fxFlex="5%">
+                            <mat-progress-spinner color="green" mode="indeterminate" [diameter]="15">
+                            </mat-progress-spinner>
+                        </td>
+                        <td *ngIf="isMobileVerified" fxFlex="5%">
+                            <i class="fa fa-check-circle sent-sms-icon" aria-hidden="true"></i>
+                        </td>
+                        <td fxFlex="95%">
+                            <span class="sent-sms-text"> Verifying mobile number with partner bank...</span>
+                        </td>
+                    </div>
+                </tr>
+                <tr *ngIf="shouldStartLoadingBankAccounts">
+                    <div fxLayout="row">
+                        <td *ngIf="!isBankAccountsLoaded" fxFlex="5%">
+                            <mat-progress-spinner color="green" mode="indeterminate" [diameter]="15">
+                            </mat-progress-spinner>
+                        </td>
+                        <td *ngIf="isBankAccountsLoaded" fxFlex="5%">
+                            <i class="fa fa-check-circle sent-sms-icon" aria-hidden="true"></i>
+                        </td>
+                        <td fxFlex="95%">
+                            <span class="sent-sms-text"> Finding bank accounts...</span>
+                        </td>
+                    </div>
+                </tr>
+
+                <tr *ngIf="noBankAccountsFound">
+                    <div fxLayout="row">
+                        <td fxFlex="6%">
+                            <i class="fa fa-exclamation-triangle no-account-icon" aria-hidden="true"></i>
+                        </td>
+                        <td fxFlex="94%">
+                            <span class="no-account-text"> No bank account found in {{upiRegisterForm.bankName}} with selected mobile no...</span>
+                        </td>
+                    </div>
+                </tr>
+
+                <tr *ngIf="showFetchedBankAccounts">
+                    <div class="bank-account-found-label">Found {{listAccounts.length}} account(s) from
+                        {{upiRegisterForm.bankName}}</div>
+                    <mat-radio-group formControlName="selectedAccount" (change)="onAccountSelection()">
+                        <div *ngFor="let account of listAccounts">
+                            <div fxLayout="column">
+                                <div fxLayout="row" style="max-height: 20px;">
+                                    <td fxFlex="25%">
+                                        <span class="sent-sms-text"> Account No. </span>
+                                    </td>
+                                    <td fxFlex="5%">
+                                        <span class="sent-sms-text"> : </span>
+                                    </td>
+                                    <td fxFlex="60%">
+                                        <span class="sent-sms-text" style="font-weight: bold;">
+                                            {{account.accNum}}</span>
+                                    </td>
+                                    <td fxFlex="10%">
+                                        <mat-radio-button [value]="account"></mat-radio-button>
+                                    </td>
+                                </div>
+                                <div fxLayout="row">
+                                    <td fxFlex="25%">
+                                        <span class="sent-sms-text"> IFSC </span>
+                                    </td>
+                                    <td fxFlex="5%">
+                                        <span class="sent-sms-text"> : </span>
+                                    </td>
+                                    <td fxFlex="60%">
+                                        <span class="sent-sms-text"> {{account.accIfsc}}</span>
+                                    </td>
+                                </div>
+                                <div fxLayout="row">
+                                    <td fxFlex="25%">
+                                        <span class="sent-sms-text"> Branch </span>
+                                    </td>
+                                    <td fxFlex="5%">
+                                        <span class="sent-sms-text"> : </span>
+                                    </td>
+                                    <td fxFlex="60%">
+                                        <span class="sent-sms-text"> {{account.bankBranch}}</span>
+                                    </td>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <mat-card-actions *ngIf="enableCardVerifierButton">
+                            <button mat-raised-button color="basic" (click)="close()">cancel
+                            </button>
+                            <button *ngIf="enableCardVerifierButton" mat-raised-button color="primary"
+                                class="proceed-to-next-btn" (click)="onNextCardVerifierScreen()">next step</button>
+                        </mat-card-actions>
+                    </mat-radio-group>
+                </tr>
+
+                <tr *ngIf="shouldShowCardVerifierScreen">
+                    <div class="bank-account-found-label">Provide below details for selected account
+                        {{upiRegisterForm.accNum}} from
+                        {{upiRegisterForm.bankName}}</div>
+                </tr>
+                <tr *ngIf="shouldShowCardVerifierScreen">
+                    <mat-form-field class="card-full-width" appearance="outline">
+                        <mat-label>Debit Card Last 6 Digits</mat-label>
+                        <input matInput placeholder="Debit Card Last 6 Digits" formControlName="debitCardNo">
+                        <mat-error *ngIf="isFieldInvalid('debitCardNo')">
+                            Please enter last 6 digits of debit card
+                        </mat-error>
+                    </mat-form-field>
+                </tr>
+
+                <tr *ngIf="shouldShowCardVerifierScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Debit Card Expiry (MM/YY)</mat-label>
+                            <input matInput placeholder="MM/YY" formControlName="debitCardExpiry">
+                            <mat-error *ngIf="isFieldInvalid('debitCardExpiry')">
+                                Please enter valid debit card expiry (MM/YY)
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <mat-card-actions *ngIf="shouldShowCardVerifierScreen">
+                    <button mat-raised-button color="basic" (click)="close()">cancel
+                    </button>
+                    <button [disabled]="isCardFieldsInvalid('debitCardNo', 'debitCardExpiry')"
+                        *ngIf="shouldShowCardVerifierScreen" mat-raised-button color="primary"
+                        class="proceed-to-next-btn" (click)="onNextOtpVerifierScreen()">next step</button>
+                </mat-card-actions>
+
+                <tr *ngIf="shouldShowOtpVerifierScreen">
+                    <div class="bank-account-found-label">Provide ATM PIN & received OTP for account
+                        {{upiRegisterForm.accNum}} from
+                        {{upiRegisterForm.bankName}}</div>
+                </tr>
+
+                <tr *ngIf="shouldShowOtpVerifierScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Debit Card PIN</mat-label>
+                            <input matInput placeholder="Debit Card PIN" formControlName="debitCardPin" type="password">
+                            <mat-error *ngIf="isFieldInvalid('debitCardPin')">
+                                Please enter valid debit card pin
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr *ngIf="shouldShowOtpVerifierScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Mobile OTP</mat-label>
+                            <input matInput placeholder="Mobile OTP" formControlName="otp">
+                            <mat-error *ngIf="isFieldInvalid('otp')">
+                                Please enter valid otp
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <mat-card-actions *ngIf="shouldShowOtpVerifierScreen">
+                    <button mat-raised-button color="basic" (click)="close()">cancel
+                    </button>
+                    <button [disabled]="isOtpFieldsInvalid('debitCardPin', 'otp')" *ngIf="shouldShowOtpVerifierScreen"
+                        mat-raised-button color="primary" class="proceed-to-next-btn"
+                        (click)="onNextUPIPinScreen()">next step</button>
+                </mat-card-actions>
+
+                <tr *ngIf="shouldShowUPIPinScreen">
+                    <div class="bank-account-found-label">Please Set UPI PIN for account
+                        {{upiRegisterForm.accNum}} from
+                        {{upiRegisterForm.bankName}}</div>
+                </tr>
+
+                <tr *ngIf="shouldShowUPIPinScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>UPI PIN</mat-label>
+                            <input matInput placeholder="Debit Card PIN" formControlName="upiPin" type="password">
+                            <mat-error *ngIf="isFieldInvalid('upiPin')">
+                                Please enter new upi pin
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr *ngIf="shouldShowUPIPinScreen">
+                    <td>
+                        <mat-form-field class="card-full-width" appearance="outline">
+                            <mat-label>Confirm UPI PIN</mat-label>
+                            <input matInput placeholder="Confirm UPI PIN" formControlName="confirmUpiPin"
+                                type="password">
+                            <mat-error *ngIf="isFieldInvalid('confirmUpiPin')">
+                                Please confirm new upi pin
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <mat-card-actions *ngIf="shouldShowUPIPinScreen">
+                    <button mat-raised-button color="basic" (click)="close()">cancel
+                    </button>
+                    <button [disabled]="isUPIPinFieldsInvalid('upiPin', 'confirmUpiPin')" *ngIf="shouldShowUPIPinScreen"
+                        mat-raised-button color="primary" class="proceed-to-next-btn"
+                        (click)="onNextRegisterScreen()">register</button>
+                </mat-card-actions>
+
+                <tr>
+                    <ngx-spinner bdColor = "#F0F8FF" size = "medium" color = "#1e81b0" type = "ball-clip-rotate" [fullScreen] = "false" style="opacity: 0.6;"></ngx-spinner>
+                    <mat-progress-spinner *ngIf="isLoading" color="green" mode="indeterminate" [diameter]="50"
+                        class="account-added-loader">
+                    </mat-progress-spinner>
+                    <div *ngIf="shouldShowAccountAddedScreen">
+                        <i class="fa fa-check-circle-o account-added-success-icon" aria-hidden="true"></i>
+                        <span class="account-added-success-label">UPI Account added successfully</span>
+                        <div fxLayout="column" class="account-added-success-details">
+                            <div fxLayout="row">
+                                <td fxFlex="20%">
+                                    <span class="account-added-text"> A/C No. </span>
+                                </td>
+                                <td fxFlex="5%">
+                                    <span class="account-added-text"> : </span>
+                                </td>
+                                <td fxFlex="70%">
+                                    <span class="account-added-text" style="font-weight: bold;">
+                                        {{upiRegisterForm.accNum}}</span>
+                                </td>
+                            </div>
+                            <div fxLayout="row">
+                                <td fxFlex="20%">
+                                    <span class="account-added-text"> IFSC </span>
+                                </td>
+                                <td fxFlex="5%">
+                                    <span class="account-added-text"> : </span>
+                                </td>
+                                <td fxFlex="70%">
+                                    <span class="account-added-text"> {{upiRegisterForm.accIfsc}}</span>
+                                </td>
+                            </div>
+                            <div fxLayout="row">
+                                <td fxFlex="20%">
+                                    <span class="account-added-text"> Branch </span>
+                                </td>
+                                <td fxFlex="5%">
+                                    <span class="account-added-text"> : </span>
+                                </td>
+                                <td fxFlex="70%">
+                                    <span class="account-added-text"> {{upiRegisterForm.bankBranch}}</span>
+                                </td>
+                            </div>
+                        </div>
+                        <div fxLayout="row" class="account-added-pin-label">
+                            <td fxFlex="30%">
+                                <button mat-raised-button color="primary" (click)="onSubmit()"
+                                    class="done-button">done</button>
+                            </td>
+                        </div>
+                    </div>
+                </tr>
+            </table>
+            <mat-card-actions *ngIf="!enableCardVerifierButton && !enableOtpVerifierButton && !enableUPIPinButton && !shouldShowAccountAddedScreen">
+                <button mat-raised-button color="basic" (click)="close()">cancel
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+</mat-card>
