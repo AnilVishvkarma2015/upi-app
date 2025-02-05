@@ -5,6 +5,7 @@ import { ToastService } from './toast.service';
 import { UPIAccountModel } from '../models/upi-account.model';
 import { UPIPaymentModel } from '../models/upi-payment.model';
 import { BankTransactionModel } from '../models/bank-transactions.model';
+import { AppConfig } from '../config/app.config';
 
 @Injectable({
     providedIn: 'root'

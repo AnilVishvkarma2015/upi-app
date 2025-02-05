@@ -16,7 +16,7 @@ export class AuthenticationService {
     isLoginAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
     isBankAuthenticated = new BehaviorSubject<boolean>(this.hasBankToken());
     apiBaseURL = "https://spring-boot-upi-meta-service.onrender.com";
-
+    
     constructor(private http: HttpClient, private router: Router, private toastService: ToastService) {
 
     }

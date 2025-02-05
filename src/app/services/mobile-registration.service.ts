@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HeaderService } from './header.service';
 import { ToastService } from './toast.service';
 import { MobileRegistration } from '../models/mobile-registration.model';
+import { AppConfig } from '../config/app.config';
 
 @Injectable({
     providedIn: 'root'

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { AppConfig } from '../config/app.config';
 import { HeaderService } from './header.service';
 import { ToastService } from './toast.service';
 import { BankAccountModel } from '../models/bank-accounts.model';

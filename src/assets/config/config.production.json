@@ -6,6 +6,6 @@
         "console": true
     },
     "apiServer": {
-        "baseURL": "https://nodejs-fb-app.herokuapp.com/"
+        "baseURL": "https://spring-boot-upi-meta-service.onrender.com"
     }
 }
